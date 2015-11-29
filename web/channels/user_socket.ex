@@ -2,7 +2,7 @@ defmodule Codemash2016.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "rooms:*", Codemash2016.RoomChannel
+  channel "games:*", Codemash2016.GameChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

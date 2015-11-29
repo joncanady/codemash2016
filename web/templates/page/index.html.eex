@@ -13,8 +13,9 @@
     <h4>Ready To Play?</h4>
     <form>
         <label for="username">Username</label>
-        <input type="text" name="username">
-        <input type="submit" name="join" value="Join Lobby">
+        <input type="text" name="username" id="username">
+        <input type="submit" name="join" value="Join Lobby" id="join">
     </form>
+    <input type="button" name="drop" value="Leave Lobby" id="drop">
   </div>
 </div>
