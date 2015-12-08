@@ -5,6 +5,8 @@ I.  What is Phoenix?
 - General idea of Phoenix
 - Phoenix can be most easily compared to Rails.  Presentation does not assume you are familiar with Rails, but some general comparisons of its place in the web development ecosystem are helpful.
 - Features of Phoenix that Rails (and other existing frameworks) don't have
+-- it is worth getting into some depth on Erlang, Elixir, and multiple processor cores - cribbing some of the discussion from Intro to Elixir.  This is conceptually
+important for people who might wonder "why bother using a clunkier Ruby at all?  Why did someone come up with this in the first place?"
 - Business use cases for Phoenix as a result of above
 
 II. What is Elixir?
@@ -12,6 +14,8 @@ II. What is Elixir?
 - Which means what, exactly?
 - This isn't an intro to Elixir course, but a look at it would be helpful because we'll be going through some Phoenix code later.
 - We assume you can generally figure out the syntax;  we're just looking at specifics
+-- This also isn't a class on functional programming.  We may, in the interests of time, simply have to handwave functional programming away as merely a matter
+of syntax, bizarre though that sounds on its face.  Consider how long "intro to functional programming" would take to explain.
 
 III.  A sample Phoenix project
 - solving an important business decision-making problem:  trilemmate local optimum
