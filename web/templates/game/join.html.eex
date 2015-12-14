@@ -1,0 +1,9 @@
+<div class="jumbotron">
+  <h2>Welcome to CodeMash v.2.0.1.6!</h2>
+  <p class="lead">ROCK. PAPER. SCISSORS.</p>
+
+  <form>
+      <input type="text" name="game_id" />
+      <input type="submit" value="Join Game">
+  </form>
+</div>

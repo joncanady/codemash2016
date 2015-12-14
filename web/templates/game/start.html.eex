@@ -1,0 +1,12 @@
+<div class="row marketing">
+    <input type="hidden" id="game_code" value="<%= @game_code %>"/>
+    <div class="col-lg-8 col-md-offset-2">
+        <h2>Waiting for second player...</h2>
+
+        Give them this link: <%= game_url(@conn, :join, @game_code) %>
+    </div>
+</div>
+
+<script type="text/javascript">
+   game = require("web/static/js/game").Game.connect($('#game_code').val())
+</script>
