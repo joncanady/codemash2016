@@ -8,5 +8,6 @@
 </div>
 
 <script type="text/javascript">
-   game = require("web/static/js/game").Game.connect($('#game_code').val())
+    game = require("web/static/js/game").Game;
+    game.connect($('#game_code').val())
 </script>
