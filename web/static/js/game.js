@@ -19,5 +19,7 @@ export var Game = {
 
         this.channel.onError(e => console.log("CHANNEL connection error", e))
         this.channel.onClose(e => console.log("CHANNEL closed", e))
+
+        this.channel.on("join", msg => { console.log("INCOMING", msg) })
     }
 }
