@@ -11,7 +11,7 @@ defmodule Codemash2016.GameController do
     render conn, "start.html", game_code: game_code
   end
 
-  def join(conn, _params) do
-    render conn, "join.html"
+  def join(conn, params) do
+    render conn, "join.html", game_code: params["game_code"]
   end
 end
