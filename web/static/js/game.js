@@ -19,7 +19,6 @@ export var Game = {
         this.channel = this.socket.channel(this.game_channel)
         this.channel.join().receive("ignore", () => console.log("auth error"))
             .receive("ok", () => console.log("CHANNEL join"))
-            .after(10000, () => console.log("CHANNEL connection interrupt"))
 
         this.channel.onError(e => console.log("CHANNEL connection error", e))
         this.channel.onClose(e => console.log("CHANNEL closed", e))

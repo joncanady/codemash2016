@@ -24,7 +24,9 @@
           <p class="lead">ROCK. PAPER. SCISSORS.</p>
       </div>
 
-      <%= @inner %>
+      <div class="row">
+        <%= render @view_module, @view_template, assigns %>
+      </div>
 
     </div> <!-- /container -->
   </body>

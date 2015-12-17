@@ -18,8 +18,7 @@ defmodule Codemash2016.Web do
 
   def model do
     quote do
-      use Ecto.Model
-      
+      use Ecto.Schema
     end
   end
 
@@ -28,7 +27,7 @@ defmodule Codemash2016.Web do
       use Phoenix.Controller
 
       alias Codemash2016.Repo
-      import Ecto.Model
+      import Ecto
       import Ecto.Query, only: [from: 1, from: 2]
 
       import Codemash2016.Router.Helpers
@@ -60,7 +59,7 @@ defmodule Codemash2016.Web do
       use Phoenix.Channel
 
       alias Codemash2016.Repo
-      import Ecto.Model
+      import Ecto
       import Ecto.Query, only: [from: 1, from: 2]
 
     end
