@@ -1,21 +1,17 @@
-<div class="row">
-    <input type="hidden" id="game_code" value="<%= @game_code %>"/>
-    <div class="col-lg-6" id="player_one">
-    </div>
-    <div class="col-lg-6" id="player_two">
-    </div>
-    <div class="col-lg-8 col-md-offset-2">
-        <div class="pregame">
-            <h1>Starting Game</h1>
-            <h2>Give your oppoent this link: </h2>
-            <h2><%= game_url(@conn, :join, @game_code) %></h2>
+<%= render "_players.html" %>
 
-            <form>
-                <label for="player_one_name">Your name:</label>
-                <input type="text" name="player_one_name" id="player_one_name" class="input-lg col-xs-6 form-control">
-                <input type="button" name="join_game" id="join_game" value="Join Game" class="btn btn-success btn-lg btn-block">
-            </form>
-        </div>
+<div class="col-lg-8 col-md-offset-2">
+    <input type="hidden" id="game_code" value="<%= @game_code %>"/>
+    <div class="pregame">
+        <h1>Starting Game</h1>
+        <h2>Give your oppoent this link: </h2>
+        <h2><%= game_url(@conn, :join, @game_code) %></h2>
+
+        <form>
+            <label for="player_one_name">Your name:</label>
+            <input type="text" name="player_one_name" id="player_one_name" class="input-lg col-xs-6 form-control">
+            <input type="button" name="join_game" id="join_game" value="Join Game" class="btn btn-success btn-lg btn-block">
+        </form>
     </div>
 </div>
 
