@@ -4,20 +4,18 @@ export var Game = {
     init: function(game_code) {
         this.socket       = new Socket("/socket")
         this.game_code    = game_code
-        this.game_channel = "games:" + game_code
+        this.game_topic = "games:" + game_code
         console.log("Initialized for " + game_code)
 
         this.socket.onOpen( ev => console.log("OPEN", ev) )
         this.socket.onError( ev => console.log("ERROR", ev) )
         this.socket.onClose( ev => console.log("CLOSE", ev) )
-
-        this.channel = this.socket.channel(this.game_channel)
     },
 
     connect: function() {
         this.socket.connect()
-        this.channel = this.socket.channel(this.game_channel)
-        this.channel.join().receive("ignore", () => console.log("auth error"))
+        this.channel = this.socket.channel(this.game_topic)
+        this.channel.join()
             .receive("ok", () => console.log("CHANNEL join"))
 
         this.channel.onError(e => console.log("CHANNEL connection error", e))
