@@ -7,7 +7,7 @@ defmodule Codemash2016.Game do
   defstruct game_code: nil, player_one: {nil, nil}, player_two: {nil, nil}
 
   def generate_game_code do
-    :crypto.hash(:sha256, Integer.to_string(Date.now(:secs)))
+    :crypto.hash(:sha256, Integer.to_string(Time.now(:usecs)))
     |> Base.encode16
     |> String.slice(0, 5)
     |> String.upcase
