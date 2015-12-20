@@ -11,8 +11,8 @@ defmodule Codemash2016 do
       supervisor(Codemash2016.Endpoint, []),
       # Start the Ecto repository
       worker(Codemash2016.Repo, []),
-      # Here you could define other workers and supervisors as children
-      # worker(Codemash2016.Worker, [arg1, arg2, arg3]),
+      # Start the thing that keeps track of games
+      worker(Codemash2016.GameBucket, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
