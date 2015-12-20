@@ -3,7 +3,7 @@ defmodule Codemash2016.GameBucket do
   Starts a new bucket of games.
   """
   def start_link do
-    Agent.start_link fn -> HashDict.new end
+    Agent.start_link fn -> HashDict.new end, name: __MODULE__
   end
 
   @doc """
