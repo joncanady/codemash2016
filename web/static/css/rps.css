@@ -1,0 +1,26 @@
+h2.datline {
+    display: table;
+    white-space: nowrap;
+    &:before, &:after {
+      border-top: 1px solid green;
+      content: '';
+      display: table-cell;
+      position: relative;
+      top: 0.5em;
+      width: 45%;
+    }
+    &:before { right: 1.5%; }
+    &:after { left: 1.5%; }
+}
+
+.center {
+    text-align: center;
+}
+
+.full {
+    width: 100%;
+}
+
+.smcap {
+    font-variant: small-caps;
+}

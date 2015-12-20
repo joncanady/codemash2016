@@ -1,0 +1,22 @@
+<%= render "_players.html" %>
+
+<div class="col-lg-6 col-md-offset-3">
+    <h1>Join Game <%= @game_code %></h1>
+    <form>
+        <label for="player_two_name">Your name:</label>
+        <input type="text" name="player_two_name" id="player_two_name" class="input-lg col-xs-6 form-control">
+        <input type="button" name="join_game" id="join_game" value="Join Game" class="btn btn-success btn-lg btn-block">
+    </form>
+</div>
+
+<script type="text/javascript">
+    var game = require("web/static/js/game").Game;
+    game.init('<%= @game_code %>');
+    game.connect();
+
+
+    $("#join_game").on('click', function(e) {
+      e.preventDefault();
+      game.join("player_two", $('#player_two_name').val());
+    });
+</script>

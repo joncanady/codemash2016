@@ -2,14 +2,14 @@
 
 ## What It Do
 
-* Players join the lobby
-* Players are paired up for Rock Paper Scissors matches
+* Player One starts a game and is given a link
+* Player Two uses that link to join the game
 * Matches are conducted "best of 3"
-* Results are recorded, players are offered the chance to go back into the Lobby.
+* Results are recorded, players can start another game or leave.
 
 
 ## Development
-
+l
 To start your Phoenix app:
 
   1. Install dependencies with `mix deps.get`

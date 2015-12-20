@@ -16,7 +16,10 @@ defmodule Codemash2016.Router do
   scope "/", Codemash2016 do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    get "/", GameController, :index
+
+    get "/start", GameController, :start
+    get "/join/:game_code", GameController, :join
   end
 
   # Other scopes may use custom stacks.
