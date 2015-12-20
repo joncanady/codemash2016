@@ -29,18 +29,18 @@ export var Game = {
 
     update: function(info) {
         console.log("UPDATE", info)
-        if(info.player_one_name && !this.player_one_joined) {
+        if($.trim(info.player_one_name).length && !this.player_one_joined) {
             this.player_one_joined = true;
             $("#player_one").append("<h1>" + info.player_one_name + "</h1>");
         }
 
-        if(info.player_two_name && !this.player_two_joined) {
+        if($.trim(info.player_two_name).length && !this.player_two_joined) {
             this.player_two_joined = true;
             $("#player_two").append("<h1>" + info.player_two_name + "</h1>");
         }
 
         if (info.started) {
-            alert("GAME ON!")
+            $("#join_panel").fadeOut();
         }
     },
 
