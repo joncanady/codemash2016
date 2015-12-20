@@ -1,6 +1,8 @@
 defmodule Codemash2016 do
   use Application
 
+  @game_bucket Codemash2016.GameBucket
+
   # See http://elixir-lang.org/docs/stable/elixir/Application.html
   # for more information on OTP Applications
   def start(_type, _args) do
@@ -12,7 +14,7 @@ defmodule Codemash2016 do
       # Start the Ecto repository
       worker(Codemash2016.Repo, []),
       # Start the thing that keeps track of games
-      worker(Codemash2016.GameBucket, [])
+      worker(Codemash2016.GameBucket, [name: @game_bucket])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

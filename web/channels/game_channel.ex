@@ -1,27 +1,23 @@
 defmodule Codemash2016.GameChannel do
   use Phoenix.Channel
-  require Logger
+  alias Codemash2016.Game
+  alias Codemash2016.GameBucket
 
-  def join("games:" <> _game_id, _params, socket) do
-    Logger.debug "JOIN #{_game_id}"
-    {:ok, socket}
+  defp game_for(code) do
+    GameBucket.game_for(code)
+  end
+
+  def join("games:" <> game_code, _params, socket) do
+    {:ok, game_for(game_code), assign(socket, :game_code, game_code)}
   end
 
   def handle_in("join:" <> slot, %{"name" => name}, socket) do
-    Logger.debug "#{slot}: #{name} has entered the game."
-    broadcast! socket, "join", %{player: slot, name: name}
-    {:noreply, socket}
-  end
+    game = GameBucket.update(socket.assigns[:game_code],
+                             Game.add_player(game_for(socket.assigns[:game_code]),
+                                             slot,
+                                             name))
+    broadcast! socket, "join", game
 
-  def handle_in("join", %{"player_two" => %{"name" => name}}, socket) do
-    Logger.debug "Player 2 Join: #{name}"
-    broadcast! socket, "join", %{"player_two" => name}
-    {:noreply, socket}
-  end
-
-  def handle_in(event, msg, socket) do
-    Logger.debug "Other event." 
-    broadcast! socket, event, msg
     {:noreply, socket}
   end
 end
