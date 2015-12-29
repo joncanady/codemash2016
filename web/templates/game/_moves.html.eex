@@ -1,0 +1,7 @@
+<div class="moves" style="display: none;">
+    <input type="button" name="rock" value="Rock" class="move input-lg col-xs-6 form-control btn-block">
+    <br>
+    <input type="button" name="paper" value="Paper" class="move input-lg col-xs-6 form-control btn-block">
+    <br>
+    <input type="button" name="scissors" value="Scissors" class="move input-lg col-xs-6 form-control btn-block">
+</div>

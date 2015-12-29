@@ -1,4 +1,5 @@
 defmodule Codemash2016.GameBucket do
+  alias Codemash2016.Game
 
   ### CLIENT!
 
@@ -23,18 +24,21 @@ defmodule Codemash2016.GameBucket do
       game = %{game | started: true}
     end
 
+    game
+    |> Game.set_started_flag
+    |> Game.set_outcome
+
     put(bucket, code, game)
 
     game
   end
-
 
   ### AGENT!
 
   @doc """
   Starts a new bucket of games.
   """
-  def start_link(opts) do
+  def start_link(_opts) do
     Agent.start_link fn -> HashDict.new end, name: __MODULE__
   end
 

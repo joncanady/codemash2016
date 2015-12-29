@@ -10,13 +10,13 @@
 </div>
 
 <script type="text/javascript">
-    var game = require("web/static/js/game").Game;
-    game.init('<%= @game_code %>');
-    game.connect();
+    window.game = require("web/static/js/game").Game;
+    window.game.init('<%= @game_code %>', "player_two");
+    window.game.connect();
 
 
     $("#join_game").on('click', function(e) {
       e.preventDefault();
-      game.join("player_two", $('#player_two_name').val());
+      window.game.join("player_two", $('#player_two_name').val());
     });
 </script>
