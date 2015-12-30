@@ -1,6 +1,4 @@
 defmodule Codemash2016.GameBucket do
-  alias Codemash2016.Game
-
   ### CLIENT!
 
   @doc """
@@ -20,16 +18,7 @@ defmodule Codemash2016.GameBucket do
   Update the `game` for `code`.
   """
   def update(code, game, bucket \\ __MODULE__) do
-    if Codemash2016.Game.all_players_joined?(game) do
-      game = %{game | started: true}
-    end
-
-    game
-    |> Game.set_started_flag
-    |> Game.set_outcome
-
     put(bucket, code, game)
-
     game
   end
 

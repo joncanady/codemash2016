@@ -67,7 +67,11 @@ defmodule Codemash2016.Game do
 
   def set_started_flag(game = %Game{started: started}) when started, do: game
   def set_started_flag(game) do
-    %{game | started: true}
+    if all_players_joined?(game) do
+      %{game | started: true}
+    else
+      game
+    end
   end
 
   # SETTING OUTCOME

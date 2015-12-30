@@ -17,23 +17,27 @@ defmodule Codemash2016.GameChannel do
   end
 
   def handle_in("join:" <> slot, %{"name" => name}, socket) do
-    game = GameBucket.update(socket.assigns[:game_code],
-                             Game.add_player(game_for(socket.assigns[:game_code]),
-                                             slot,
-                                             name))
-    broadcast! socket, "join", game
+    code = socket.assigns[:game_code]
+    game = code
+    |> game_for
+    |> Game.add_player(slot, name)
+    |> Game.set_started_flag
+    |> update_game(code)
+
+    broadcast! socket, "update", game
 
     {:noreply, socket}
   end
 
   def handle_in("shoot", %{"player" => player, "choice" => choice}, socket) do
-    game = socket.assigns[:game_code]
+    code = socket.assigns[:game_code]
+    game = code
     |> game_for
     |> Game.shoot(player, choice)
     |> Game.set_outcome
-    |> update_game(socket.assigns[:game_code])
+    |> update_game(code)
 
-    broadcast! socket, "join", game
+    broadcast! socket, "update", game
 
     {:noreply, socket}
   end

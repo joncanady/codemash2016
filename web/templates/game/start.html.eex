@@ -1,6 +1,6 @@
 <%= render "_players.html" %>
 
-<div class="col-lg-8 col-md-offset-2" id="join_panel">
+<div class="col-md-12" id="join_panel">
     <input type="hidden" id="game_code" value="<%= @game_code %>"/>
     <div class="pregame">
         <h1>Starting Game</h1>

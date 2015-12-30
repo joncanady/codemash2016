@@ -30,8 +30,7 @@ export var Game = {
         this.channel.onError(e => console.log("CHANNEL connection error", e))
         this.channel.onClose(e => console.log("CHANNEL closed", e))
 
-        this.channel.on("join", info => this.update(info))
-        this.channel.on("shoot", info => this.update(info))
+        this.channel.on("update", info => this.update(info))
     },
 
     update: function(info) {
@@ -49,6 +48,21 @@ export var Game = {
         if (info.started) {
             $("#join_panel").fadeOut();
             $('#' + this.player + ' .moves').fadeIn();
+            $('#vs').fadeIn();
+        }
+
+        if (info.outcome) {
+            switch(outcome) {
+            case 'draw':
+                $("#draw").fadeIn();
+                break;
+            case 'player_one':
+                $("#player_one_wins").fadeIn();
+                break;
+            case 'player_two':
+                $("#player_two_wins").fadeIn();
+                break;
+            }
         }
     },
 
