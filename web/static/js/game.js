@@ -52,17 +52,16 @@ export var Game = {
         }
 
         if (info.outcome) {
-            switch(outcome) {
-            case 'draw':
-                $("#draw").fadeIn();
-                break;
-            case 'player_one':
-                $("#player_one_wins").fadeIn();
-                break;
-            case 'player_two':
-                $("#player_two_wins").fadeIn();
-                break;
+            if(info.outcome == 'draw') {
+                $("#outcome").html("It's a draw!");
+            } else if(info.outcome == 'player_one') {
+                $("#outcome").html(info.player_one_name + " wins!");
+            } else if(info.outcome == 'player_two') {
+                $("#outcome").html(info.player_two_name + " wins!");
             }
+
+            $("#outcome").fadeIn();
+            $('.moves').fadeOut();
         }
     },
 

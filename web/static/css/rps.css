@@ -24,3 +24,14 @@ h2.datline {
 .smcap {
     font-variant: small-caps;
 }
+
+#outcome {
+    font-weight: bold;
+    font-size: 200%;
+    font-variant: small-caps;
+    text-align: center;
+}
+
+.player_name {
+    text-align: center;
+}
