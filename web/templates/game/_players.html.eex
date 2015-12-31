@@ -1,5 +1,20 @@
-<div class="col-lg-6" id="player_one">
+<div class="row">
+    <div class="col-md-12" style="display: none;" id="outcome">
+    </div>
 </div>
 
-<div class="col-lg-6" id="player_two">
+<div class="row">
+    <div class="col-md-5" id="player_one">
+        <div id="player_one_name_here" class="player_name"></div>
+        <%= render "_moves.html" %>
+    </div>
+
+    <div class="col-md-2">
+        <h1 id="vs" style="display: none;">VS</h1>
+    </div>
+
+    <div class="col-md-5" id="player_two" class="player_name">
+        <div id="player_two_name_here"></div>
+        <%= render "_moves.html" %>
+    </div>
 </div>

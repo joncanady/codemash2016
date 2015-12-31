@@ -1,6 +1,6 @@
 <%= render "_players.html" %>
 
-<div class="col-lg-6 col-md-offset-3">
+<div class="col-md-12" id="join_panel">
     <h1>Join Game <%= @game_code %></h1>
     <form>
         <label for="player_two_name">Your name:</label>
@@ -10,13 +10,13 @@
 </div>
 
 <script type="text/javascript">
-    var game = require("web/static/js/game").Game;
-    game.init('<%= @game_code %>');
-    game.connect();
+    window.game = require("web/static/js/game").Game;
+    window.game.init('<%= @game_code %>', "player_two");
+    window.game.connect();
 
 
     $("#join_game").on('click', function(e) {
       e.preventDefault();
-      game.join("player_two", $('#player_two_name').val());
+      window.game.join("player_two", $('#player_two_name').val());
     });
 </script>

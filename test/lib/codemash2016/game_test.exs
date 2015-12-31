@@ -23,4 +23,43 @@ defmodule Codemash2016.GameTest do
 
     refute Game.waiting_for_players?(started_game)
   end
+
+  test "winning games" do
+    outcomes = [
+      {"rock", "paper", "player_two"},
+      {"rock", "scissors", "player_one"},
+      {"rock", "rock", "draw"},
+      {"paper", "rock", "player_one"},
+      {"paper", "scissors", "player_two"},
+      {"paper", "paper", "draw"},
+      {"scissors", "scissors", "draw"},
+      {"scissors", "paper", "player_one"},
+      {"scissors", "rock", "player_two"},
+    ]
+
+    Enum.each(outcomes, fn {p1_move, p2_move, outcome} ->
+      game = %Game{player_one_move: p1_move, player_two_move: p2_move}
+      assert Game.set_outcome(game).outcome == outcome
+      end)
+  end
+
+  test "setting started flag should do nothing for a started game" do
+    game = %Game{started: true}
+    assert Game.set_started_flag(game) == game
+  end
+
+  test "setting started flag should do nothing if both players aren't joined" do
+    game_missing_p1 = %Game{game_code: 'CODE',
+                            player_two_name: 'Bob'}
+    game_missing_p2 = %Game{game_code: 'CODE2',
+                            player_one_name: 'Alice'}
+    assert Game.set_started_flag(game_missing_p1) == game_missing_p1
+    assert Game.set_started_flag(game_missing_p2) == game_missing_p2
+  end
+
+  test "setting started flag should set the flag on an unstarted game with both players" do
+    game = %Game{started: false, player_one_name: 'Bob',
+                 player_two_name: 'Bob'}
+    assert Game.set_started_flag(game).started
+  end
 end

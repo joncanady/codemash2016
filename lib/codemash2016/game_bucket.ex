@@ -1,5 +1,4 @@
 defmodule Codemash2016.GameBucket do
-
   ### CLIENT!
 
   @doc """
@@ -19,22 +18,16 @@ defmodule Codemash2016.GameBucket do
   Update the `game` for `code`.
   """
   def update(code, game, bucket \\ __MODULE__) do
-    if Codemash2016.Game.all_players_joined?(game) do
-      game = %{game | started: true}
-    end
-
     put(bucket, code, game)
-
     game
   end
-
 
   ### AGENT!
 
   @doc """
   Starts a new bucket of games.
   """
-  def start_link(opts) do
+  def start_link(_opts) do
     Agent.start_link fn -> HashDict.new end, name: __MODULE__
   end
 
