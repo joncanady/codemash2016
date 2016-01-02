@@ -4,6 +4,12 @@
 </div>
 
 <div class="row">
+    <div class="col-md-12" style="display: none;" id="rematch_panel",>
+        <input type="button" name="rematch" id="rematch" value="Rematch?" class="btn btn-info btn-lg btn-block">
+    </div>
+</div>
+
+<div class="row">
     <div class="col-md-5" id="player_one">
         <div id="player_one_name_here" class="player_name"></div>
         <%= render "_moves.html" %>
@@ -18,6 +24,5 @@
         <div id="player_two_name_here" class="player_name"></div>
         <%= render "_moves.html" %>
         <div id="player_two_move_here" class="player_move"></div>
-
     </div>
 </div>
