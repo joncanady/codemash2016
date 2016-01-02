@@ -19,7 +19,7 @@ defmodule Codemash2016.Router do
     get "/", GameController, :index
 
     get "/start", GameController, :start
-    get "/game/:game_code", GameController, 
+    get "/game/:game_code", GameController, :game
     get "/join/:game_code", GameController, :join
   end
 
