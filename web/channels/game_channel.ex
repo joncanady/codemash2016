@@ -42,5 +42,15 @@ defmodule Codemash2016.GameChannel do
 
     {:noreply, socket}
   end
+
+  def handle_in("rematch", %{"player" => player}, socket) do
+    code = socket.assigns[:game_code]
+    game = code
+    |> game_for
+    |> Game.set_rematch(player)
+    |> update_game(code)
+
+    {:noreply, socket}
+  end
 end
 

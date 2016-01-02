@@ -17,7 +17,13 @@ export var Game = {
         this.opponent = (this.player == "player_one" ? "player_two" : "player_one")
 
         $('.move').on('click', function(e) {
+            e.preventDefault();
             window.game.shoot(e.target.value);
+        });
+
+        $('#rematch').on('click', function(e){
+            e.preventDefault();
+            window.game.rematch($(e.target));
         });
     },
 
@@ -65,6 +71,12 @@ export var Game = {
 
             $("#outcome").fadeIn();
             $('.moves').fadeOut();
+
+            $('#rematch_panel').fadeIn();
+        }
+
+        if (info.rematch) {
+            this.rematch_proposed = true;
         }
     },
 
@@ -76,5 +88,12 @@ export var Game = {
         console.log("SHOOTING")
         choice = choice.toLowerCase();
         this.channel.push("shoot", {player: this.player, choice: choice})
+    },
+
+    rematch: function($button) {
+        console.log('REMATCH!', $button);
+        $button.attr('value', "Rematch requested!");
+        $button.attr('disabled', true)
+        this.channel.push('rematch', {player: this.player});
     }
 }
