@@ -1,5 +1,6 @@
 defmodule Codemash2016.GameChannel do
   use Phoenix.Channel
+
   alias Codemash2016.Game
   alias Codemash2016.GameBucket
 
