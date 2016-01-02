@@ -24,7 +24,6 @@ h2.datline {
 .smcap {
     font-variant: small-caps;
 }
-
 #outcome {
     font-weight: bold;
     font-size: 200%;
@@ -33,5 +32,9 @@ h2.datline {
 }
 
 .player_name {
+    text-align: center;
+}
+
+.player_move {
     text-align: center;
 }

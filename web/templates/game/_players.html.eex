@@ -7,6 +7,7 @@
     <div class="col-md-5" id="player_one">
         <div id="player_one_name_here" class="player_name"></div>
         <%= render "_moves.html" %>
+        <div id="player_one_move_here" class="player_move"></div>
     </div>
 
     <div class="col-md-2">
@@ -14,7 +15,8 @@
     </div>
 
     <div class="col-md-5" id="player_two" class="player_name">
-        <div id="player_two_name_here"></div>
+        <div id="player_two_name_here" class="player_name"></div>
         <%= render "_moves.html" %>
+        <div id="player_two_move_here" class="player_move"></div>
     </div>
 </div>

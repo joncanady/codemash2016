@@ -52,6 +52,9 @@ export var Game = {
         }
 
         if (info.outcome) {
+            $('#player_one_move_here').html("<h2>" + info.player_one_move + "</h2>");
+            $('#player_two_move_here').html("<h2>" + info.player_two_move + "</h2>");
+
             if(info.outcome == 'draw') {
                 $("#outcome").html("It's a draw!");
             } else if(info.outcome == 'player_one') {
