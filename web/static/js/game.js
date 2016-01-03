@@ -75,6 +75,7 @@ export var Game = {
         if (this.game.outcome) {
             $('#player_one_move_here').html("<h2>" + this.game.player_one_move + "</h2>");
             $('#player_two_move_here').html("<h2>" + this.game.player_two_move + "</h2>");
+            $('.player_move').fadeIn();
 
             if(this.game.outcome == 'draw') {
                 $("#outcome").html("It's a draw!");
