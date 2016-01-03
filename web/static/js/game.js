@@ -20,6 +20,8 @@ export var Game = {
 
         $('.move').on('click', function(e) {
             e.preventDefault();
+            $(".move").removeClass("btn-primary");
+            $(e.target).addClass("btn-primary");
             window.game.shoot(e.target.value);
         });
 
@@ -84,6 +86,7 @@ export var Game = {
 
             $("#outcome").fadeIn();
             $('.moves').fadeOut();
+            $(".move").removeClass("btn-primary");
 
             if(this.game.rematch == this.opponent) {
                 $("#rematch").attr("value",
