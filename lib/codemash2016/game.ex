@@ -105,10 +105,23 @@ defmodule Codemash2016.Game do
     %{game | outcome: "player_two"}
   end
 
+  # REMATCH
 
-  @doc "Set the rematch flag for `game`, indicating `player` has asked for a rematch."
-  def set_rematch(game, player) do
+  @doc """
+  Set the rematch flag for `game`, indicating `player` has asked for a rematch.
+  """
+  def rematch(game = %Game{rematch: rematch}, player) when is_nil(rematch) do
     %{game | rematch: player}
+  end
+
+  @doc """
+  Return a started game with the same players/code as `game`.
+  """
+  def rematch(game, _) do
+    %Game{game_code: game.game_code,
+          player_one_name: game.player_one_name,
+          player_two_name: game.player_two_name,
+          started: game.started}
   end
 end
 

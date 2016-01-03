@@ -13,6 +13,8 @@ export var Game = {
         this.socket.onOpen( ev => console.log("OPEN", ev) )
         this.socket.onError( ev => console.log("ERROR", ev) )
         this.socket.onClose( ev => console.log("CLOSE", ev) )
+        this.game = null;
+
         this.player = player // should be "player_one" or "player_two"
         this.opponent = (this.player == "player_one" ? "player_two" : "player_one")
 
@@ -31,52 +33,63 @@ export var Game = {
         this.socket.connect()
         this.channel = this.socket.channel(this.game_topic)
         this.channel.join()
-            .receive("ok", (info => this.update(info)))
+            .receive("ok", (game => this.update(game)))
 
         this.channel.onError(e => console.log("CHANNEL connection error", e))
         this.channel.onClose(e => console.log("CHANNEL closed", e))
 
-        this.channel.on("update", info => this.update(info))
+        this.channel.on("update", game => this.update(game))
     },
 
     update: function(info) {
-        console.log("UPDATE", info)
-        if($.trim(info.player_one_name).length && !this.player_one_joined) {
-            this.player_one_joined = true;
-            $("#player_one_name_here").html("<h1>" + info.player_one_name + "</h1>");
-        }
+        this.game = info
+        console.log("UPDATE", this.game)
 
-        if($.trim(info.player_two_name).length && !this.player_two_joined) {
+        if($.trim(this.game.player_one_name).length) {
+            $("#player_one_name_here").html("<h1>" + this.game.player_one_name + "</h1>");
+        }
+        if($.trim(this.game.player_two_name).length) {
             this.player_two_joined = true;
-            $("#player_two_name_here").html("<h1>" + info.player_two_name + "</h1>");
+            $("#player_two_name_here").html("<h1>" + this.game.player_two_name + "</h1>");
         }
 
-        if (info.started) {
-            $("#join_panel").fadeOut();
-            $('#' + this.player + ' .moves').fadeIn();
+        if (this.game.started) {
             $('#vs').fadeIn();
+            $("#join_panel").fadeOut();
         }
 
-        if (info.outcome) {
-            $('#player_one_move_here').html("<h2>" + info.player_one_move + "</h2>");
-            $('#player_two_move_here').html("<h2>" + info.player_two_move + "</h2>");
+        if (this.game.started && !this.game.outcome) {
+            let $button = $("#rematch");
+            $button.attr('value', "Rematch?");
+            $button.attr('disabled', false)
+            $("#rematch_banner").html("")
 
-            if(info.outcome == 'draw') {
+            $("#outcome").fadeOut();
+            $(".player_move").fadeOut();
+            $('#' + this.player + ' .moves').fadeIn();
+            $("#rematch_panel").fadeOut();
+        }
+
+        if (this.game.outcome) {
+            $('#player_one_move_here').html("<h2>" + this.game.player_one_move + "</h2>");
+            $('#player_two_move_here').html("<h2>" + this.game.player_two_move + "</h2>");
+
+            if(this.game.outcome == 'draw') {
                 $("#outcome").html("It's a draw!");
-            } else if(info.outcome == 'player_one') {
-                $("#outcome").html(info.player_one_name + " wins!");
-            } else if(info.outcome == 'player_two') {
-                $("#outcome").html(info.player_two_name + " wins!");
+            } else if(this.game.outcome == 'player_one') {
+                $("#outcome").html(this.game.player_one_name + " wins!");
+            } else if(this.game.outcome == 'player_two') {
+                $("#outcome").html(this.game.player_two_name + " wins!");
             }
 
             $("#outcome").fadeIn();
             $('.moves').fadeOut();
 
+            if(this.game.rematch == this.opponent) {
+                $("#rematch").attr("value",
+                                   this.game.player_two_name + " wants to go again! Accept rematch?")
+            }
             $('#rematch_panel').fadeIn();
-        }
-
-        if (info.rematch) {
-            this.rematch_proposed = true;
         }
     },
 
@@ -95,5 +108,13 @@ export var Game = {
         $button.attr('value', "Rematch requested!");
         $button.attr('disabled', true)
         this.channel.push('rematch', {player: this.player});
+    },
+
+    opponent_name: function() {
+        if(this.player == "player_one") {
+            this.game.player_one_name;
+        } else {
+            this.game.player_two_name;
+        }
     }
 }
