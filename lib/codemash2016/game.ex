@@ -5,7 +5,9 @@ defmodule Codemash2016.Game do
   @valid_moves {:rock, :paper, :scissors}
   @players     %{"player_one" => :player_one_move, "player_two" => :player_two_move}
 
-  defstruct game_code: nil, player_one_name: nil, player_one_move: nil, player_two_name: nil, player_two_move: nil, started: false, outcome: nil
+  defstruct game_code: nil, player_one_name: nil, player_one_move: nil,
+  player_two_name: nil, player_two_move: nil, started: false, outcome: nil,
+  rematch: nil
 
   def generate_game_code do
     :crypto.hash(:sha256, Integer.to_string(Time.now(:usecs)))
@@ -101,6 +103,25 @@ defmodule Codemash2016.Game do
   ## P2 WINS
   def set_outcome(game) do
     %{game | outcome: "player_two"}
+  end
+
+  # REMATCH
+
+  @doc """
+  Set the rematch flag for `game`, indicating `player` has asked for a rematch.
+  """
+  def rematch(game = %Game{rematch: rematch}, player) when is_nil(rematch) do
+    %{game | rematch: player}
+  end
+
+  @doc """
+  Return a started game with the same players/code as `game`.
+  """
+  def rematch(game, _) do
+    %Game{game_code: game.game_code,
+          player_one_name: game.player_one_name,
+          player_two_name: game.player_two_name,
+          started: game.started}
   end
 end
 

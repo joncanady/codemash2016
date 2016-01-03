@@ -1,10 +1,12 @@
 defmodule Codemash2016.GameBucket do
+  @name __MODULE__
+
   ### CLIENT!
 
   @doc """
   Get the game for `code`. Will initialize a new game if one doesn't exist.
   """
-  def game_for(code, bucket \\ __MODULE__) do
+  def game_for(code, bucket \\ @name) do
     game = get(bucket, code)
     if !game do
       game = %Codemash2016.Game{game_code: code}
@@ -17,7 +19,7 @@ defmodule Codemash2016.GameBucket do
   @doc """
   Update the `game` for `code`.
   """
-  def update(code, game, bucket \\ __MODULE__) do
+  def update(code, game, bucket \\ @name) do
     put(bucket, code, game)
     game
   end
@@ -27,8 +29,9 @@ defmodule Codemash2016.GameBucket do
   @doc """
   Starts a new bucket of games.
   """
-  def start_link(_opts) do
-    Agent.start_link fn -> HashDict.new end, name: __MODULE__
+  def start_link(opts \\ []) do
+    opts = Keyword.put_new(opts, :name, @name)
+    Agent.start_link fn -> HashDict.new end, opts
   end
 
   @doc """

@@ -62,4 +62,30 @@ defmodule Codemash2016.GameTest do
                  player_two_name: 'Bob'}
     assert Game.set_started_flag(game).started
   end
+
+  test "requesting a rematch flags the request" do
+    game = %Game{rematch: nil}
+    assert Game.rematch(game, "player_one") == %Game{rematch: "player_one"}
+  end
+
+  test "the second player requesting a rematch resets the game" do
+    current_game = %Game{game_code: 'CODE',
+                         player_one_name: "p",
+                         player_two_name: "p2",
+                         player_one_move: "rock",
+                         player_two_move: "scissors",
+                         outcome: "player_one",
+                         rematch: "player_two",
+                         started: true}
+    reset_game = %Game{game_code: current_game.game_code,
+                       player_one_name: current_game.player_one_name,
+                       player_two_name: current_game.player_two_name,
+                       started: true,
+                       player_one_move: nil,
+                       player_two_move: nil,
+                       outcome: nil,
+                       rematch: nil}
+
+    assert Game.rematch(current_game, "_") == reset_game
+  end
 end

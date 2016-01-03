@@ -4,7 +4,7 @@ defmodule Codemash2016.GameBucketTest do
   alias Codemash2016.Game
 
   setup do
-    {:ok, bucket} = GameBucket.start_link
+    {:ok, bucket} = GameBucket.start_link name: {:global, __MODULE__}
     {:ok, bucket: bucket}
   end
 

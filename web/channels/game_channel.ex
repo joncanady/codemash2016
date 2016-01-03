@@ -1,5 +1,6 @@
 defmodule Codemash2016.GameChannel do
   use Phoenix.Channel
+
   alias Codemash2016.Game
   alias Codemash2016.GameBucket
 
@@ -35,6 +36,18 @@ defmodule Codemash2016.GameChannel do
     |> game_for
     |> Game.shoot(player, choice)
     |> Game.set_outcome
+    |> update_game(code)
+
+    broadcast! socket, "update", game
+
+    {:noreply, socket}
+  end
+
+  def handle_in("rematch", %{"player" => player}, socket) do
+    code = socket.assigns[:game_code]
+    game = code
+    |> game_for
+    |> Game.rematch(player)
     |> update_game(code)
 
     broadcast! socket, "update", game
