@@ -14,7 +14,6 @@ use Mix.Config
 config :codemash2016, Codemash2016.Endpoint,
   http: [port: {:system, "PORT"}],
   url: [scheme: "https", host: "codemash2016.joncanady.com", port: 443],
-  force_ssl: [rewrite_on: [:x_forwarded_proto]],
   cache_static_manifest: "priv/static/manifest.json",
   secret_key_base: System.get_env("SECRET_KEY_BASE")
 
