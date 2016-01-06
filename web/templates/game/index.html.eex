@@ -5,7 +5,7 @@
         <input type="submit" name="join_game" id="join_game" value="Join Game" class="btn btn-success btn-lg btn-block">
       </form>
 
-      <h2 class="datline center full smcap">--- or ---</h2>
+      <h2 class="center full smcap">--- or ---</h2>
 
       <a href="/start" class="btn btn-primary btn-lg btn-block">Start A New Game</a>
   </div>
