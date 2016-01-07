@@ -4,12 +4,12 @@
 
 * Player One starts a game and is given a link
 * Player Two uses that link to join the game
-* Matches are conducted "best of 3"
-* Results are recorded, players can start another game or leave.
+* Results are recorded, players can request a rematch.
+* Whatever else you code into it!
 
 
 ## Development
-l
+
 To start your Phoenix app:
 
   1. Install dependencies with `mix deps.get`

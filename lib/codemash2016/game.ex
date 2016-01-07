@@ -2,7 +2,6 @@ defmodule Codemash2016.Game do
   alias Codemash2016.Game
   use Timex
 
-  @valid_moves {:rock, :paper, :scissors}
   @players     %{"player_one" => :player_one_move, "player_two" => :player_two_move}
 
   defstruct game_code: nil, player_one_name: nil, player_one_move: nil,

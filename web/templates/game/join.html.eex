@@ -19,4 +19,11 @@
       e.preventDefault();
       window.game.join("player_two", $('#player_two_name').val());
     });
+
+    $("#player_one_name").keypress(function(e) {
+        if (e.which == 13) {
+            e.preventDefault();
+            $('#join_game').click();
+        }
+    })
 </script>
